@@ -50,13 +50,37 @@ create_database()
 
 
 # ==========================================
-# HOME
-# SERVE THE HEALTHLENS WEBSITE
+# HEALTHLENS WEBSITE
 # ==========================================
 
 @app.route("/")
 def home():
     return send_from_directory(".", "index.html")
+
+
+@app.route("/style.css")
+def style():
+    return send_from_directory(".", "style.css")
+
+
+@app.route("/script.js")
+def script():
+    return send_from_directory(".", "script.js")
+
+
+@app.route("/history.html")
+def history_page():
+    return send_from_directory(".", "history.html")
+
+
+@app.route("/history.js")
+def history_script():
+    return send_from_directory(".", "history.js")
+
+
+@app.route("/assets/<path:filename>")
+def assets(filename):
+    return send_from_directory("assets", filename)
 
 
 # ==========================================

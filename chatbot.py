@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from dotenv import load_dotenv
 from google import genai
@@ -22,7 +22,7 @@ api_key = os.getenv("GEMINI_API_KEY")
 
 if not api_key:
     raise ValueError(
-        "GEMINI_API_KEY was not found in the .env file."
+        "GEMINI_API_KEY was not found in the environment variables."
     )
 
 
@@ -51,12 +51,12 @@ create_database()
 
 # ==========================================
 # HOME
+# SERVE THE HEALTHLENS WEBSITE
 # ==========================================
 
 @app.route("/")
 def home():
-
-    return "HealthLens backend is working!"
+    return send_from_directory(".", "index.html")
 
 
 # ==========================================
@@ -285,4 +285,8 @@ def history():
 
 if __name__ == "__main__":
 
-    app.run(debug=True)
+    app.run(
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", 5000)),
+        debug=False
+    )

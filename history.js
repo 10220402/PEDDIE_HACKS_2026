@@ -14,9 +14,7 @@ async function loadHistory() {
 
     try {
 
-        const response = await fetch(
-            "http://127.0.0.1:5000/history"
-        );
+        const response = await fetch("/history");
 
 
         if (!response.ok) {
@@ -171,6 +169,7 @@ function formatAnswer(text) {
 
 
     return answer;
+
 }
 
 

@@ -5,13 +5,11 @@
 const input = document.getElementById("userMessage");
 const messages = document.getElementById("chatMessages");
 
-
 // ==========================================
 // CONVERSATION HISTORY
 // ==========================================
 
 let conversationHistory = [];
-
 
 // ==========================================
 // SEND MESSAGE
@@ -25,12 +23,10 @@ async function sendMessage() {
         return;
     }
 
-
     conversationHistory.push({
         role: "user",
         message: userText
     });
-
 
     messages.innerHTML += `
         <div class="user-message">
@@ -38,12 +34,9 @@ async function sendMessage() {
         </div>
     `;
 
-
     input.value = "";
 
-
     const thinkingId = "thinking-" + Date.now();
-
 
     messages.innerHTML += `
         <div class="bot-message thinking" id="${thinkingId}">
@@ -51,60 +44,47 @@ async function sendMessage() {
         </div>
     `;
 
-
     scrollToBottom();
-
 
     try {
 
-        const response = await fetch(
-            "http://127.0.0.1:5000/chat",
-            {
-                method: "POST",
+        const response = await fetch("/chat", {
+            method: "POST",
 
-                headers: {
-                    "Content-Type": "application/json"
-                },
+            headers: {
+                "Content-Type": "application/json"
+            },
 
-                body: JSON.stringify({
-                    message: userText,
-                    history: conversationHistory
-                })
-            }
-        );
-
+            body: JSON.stringify({
+                message: userText,
+                history: conversationHistory
+            })
+        });
 
         if (!response.ok) {
             throw new Error("Server error");
         }
 
-
         const data = await response.json();
-
 
         const thinkingMessage =
             document.getElementById(thinkingId);
-
 
         if (thinkingMessage) {
             thinkingMessage.remove();
         }
 
-
         const reply =
             data.reply ||
             "Sorry, I couldn't generate a response.";
-
 
         conversationHistory.push({
             role: "assistant",
             message: reply
         });
 
-
         const formattedReply =
             formatAIResponse(reply);
-
 
         messages.innerHTML += `
             <div class="bot-message">
@@ -112,9 +92,7 @@ async function sendMessage() {
             </div>
         `;
 
-
         scrollToBottom();
-
 
     } catch (error) {
 
@@ -123,15 +101,12 @@ async function sendMessage() {
             error
         );
 
-
         const thinkingMessage =
             document.getElementById(thinkingId);
-
 
         if (thinkingMessage) {
             thinkingMessage.remove();
         }
-
 
         messages.innerHTML += `
             <div class="bot-message error-message">
@@ -140,11 +115,9 @@ async function sendMessage() {
             </div>
         `;
 
-
         scrollToBottom();
     }
 }
-
 
 // ==========================================
 // QUICK HEALTH TOPICS
@@ -157,7 +130,6 @@ function askTopic(question) {
     sendMessage();
 }
 
-
 // ==========================================
 // CLEAR CHAT
 // ==========================================
@@ -166,15 +138,11 @@ function clearChat() {
 
     conversationHistory = [];
 
-
     messages.innerHTML = `
         <div class="bot-message">
-
             👋 Hello! I'm HealthLens.
             Ask me about a health topic.
-
         </div>
-
 
         <div class="health-topics">
 
@@ -205,10 +173,8 @@ function clearChat() {
         </div>
     `;
 
-
     scrollToBottom();
 }
-
 
 // ==========================================
 // FORMAT AI RESPONSE
@@ -220,45 +186,33 @@ function formatAIResponse(text) {
 
     text = escapeHTML(text);
 
-
-    // Bold headings
     text = text.replace(
         /\*\*(.*?)\*\*/g,
         "<strong>$1</strong>"
     );
 
-
-    // Bullet points
     text = text.replace(
         /^[ \t]*[-•]\s*(.*)$/gm,
         "<div class='answer-point'>• $1</div>"
     );
 
-
-    // Numbered points
     text = text.replace(
         /^[ \t]*(\d+)\.\s+(.*)$/gm,
         "<div class='answer-point'>$1. $2</div>"
     );
 
-
-    // Remove excessive blank lines
     text = text.replace(
         /\n{2,}/g,
         "\n"
     );
 
-
-    // Normal line breaks
     text = text.replace(
         /\n/g,
         "<br>"
     );
 
-
     return text;
 }
-
 
 // ==========================================
 // SECURITY
@@ -274,7 +228,6 @@ function escapeHTML(text) {
         .replace(/'/g, "&#039;");
 }
 
-
 // ==========================================
 // AUTO SCROLL
 // ==========================================
@@ -285,21 +238,17 @@ function scrollToBottom() {
         messages.scrollHeight;
 }
 
-
 // ==========================================
 // ENTER KEY SUPPORT
 // ==========================================
 
-input.addEventListener(
-    "keydown",
-    function(event) {
+input.addEventListener("keydown", function(event) {
 
-        if (event.key === "Enter") {
+    if (event.key === "Enter") {
 
-            event.preventDefault();
+        event.preventDefault();
 
-            sendMessage();
-        }
-
+        sendMessage();
     }
-);
+
+});

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HealthLens</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+
+        <h1>❤️ HealthLens</h1>
+
+        <p>
+            Understand health information in simple language.
+        </p>
+
+    </header>
+
+
+    <main>
+
+        <section class="chat-box">
+
+            <div class="chat-header">
+
+                <div>
+                    <h2>🤖 Ask HealthLens AI</h2>
+
+                    <p>
+                        Your simple health information assistant
+                    </p>
+                </div>
+
+                <button
+                    class="clear-button"
+                    onclick="clearChat()"
+                >
+                    🗑️ Clear Chat
+                </button>
+
+            </div>
+
+
+            <div id="chatMessages" class="chat-messages">
+
+                <div class="bot-message">
+
+                    👋 Hello! I'm HealthLens.
+                    Ask me about a health topic.
+
+                </div>
+
+
+                <div class="health-topics">
+
+                    <h3>
+                        Explore Health Topics
+                    </h3>
+
+
+                    <div class="topic-categories">
+
+                        <button
+                            onclick="askTopic('What is asthma?')"
+                        >
+                            🫁 Respiratory Health
+                        </button>
+
+
+                        <button
+                            onclick="askTopic('What is anemia?')"
+                        >
+                            🩸 Blood & Nutrition
+                        </button>
+
+
+                        <button
+                            onclick="askTopic('What is diabetes?')"
+                        >
+                            🩺 Common Conditions
+                        </button>
+
+
+                        <button
+                            onclick="askTopic('What is dehydration?')"
+                        >
+                            💧 Everyday Health
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="chat-input">
+
+                <input
+                    type="text"
+                    id="userMessage"
+                    placeholder="Ask a health question..."
+                >
+
+                <button onclick="sendMessage()">
+                    Send
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            HealthLens is for educational purposes only.
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

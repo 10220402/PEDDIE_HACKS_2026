@@ -1,0 +1,782 @@
+/* ==========================================
+   HEALTHLENS - CLEAN DESIGN
+   ========================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: #f2f8f8;
+
+    color: #18323a;
+
+    min-height: 100vh;
+}
+
+
+/* ==========================================
+   HEADER
+   ========================================== */
+
+header {
+    background: white;
+
+    text-align: center;
+
+    padding: 45px 20px 35px;
+
+    border-bottom: 1px solid #e1eeee;
+}
+
+
+header h1 {
+    font-size: 42px;
+
+    margin-bottom: 10px;
+
+    color: #12343b;
+}
+
+
+header p {
+    font-size: 18px;
+
+    color: #60777d;
+}
+
+
+/* ==========================================
+   MAIN
+   ========================================== */
+
+main {
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    padding: 45px 20px;
+}
+
+
+/* ==========================================
+   CHAT BOX
+   ========================================== */
+
+.chat-box {
+    width: 100%;
+
+    max-width: 850px;
+
+    background: white;
+
+    border-radius: 22px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 12px 35px rgba(30, 90, 95, 0.12);
+}
+
+
+/* ==========================================
+   CHAT HEADER
+   ========================================== */
+
+.chat-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 30px 25px 25px;
+
+    border-bottom: 1px solid #e5eeee;
+}
+
+
+.chat-header h2 {
+    font-size: 27px;
+
+    color: #163940;
+
+    margin-bottom: 8px;
+}
+
+
+.chat-header p {
+    color: #71868b;
+
+    font-size: 16px;
+}
+
+
+/* ==========================================
+   CLEAR CHAT
+   ========================================== */
+
+.clear-button {
+    border: 1px solid #d7e5e6;
+
+    background: white;
+
+    color: #60777d;
+
+    padding: 10px 14px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-size: 14px;
+
+    white-space: nowrap;
+
+    transition: 0.2s ease;
+}
+
+
+.clear-button:hover {
+    background: #fff3f3;
+
+    border-color: #e5bcbc;
+
+    color: #9a4141;
+}
+
+
+/* ==========================================
+   CHAT MESSAGES
+   ========================================== */
+
+.chat-messages {
+    min-height: 380px;
+
+    max-height: 500px;
+
+    overflow-y: auto;
+
+    padding: 30px;
+
+    background: #fbfdfd;
+}
+
+
+/* ==========================================
+   BOT MESSAGE
+   ========================================== */
+
+.bot-message {
+    width: fit-content;
+
+    max-width: 85%;
+
+    background: #e8f5f5;
+
+    color: #243f45;
+
+    padding: 15px 18px;
+
+    border-radius:
+        16px
+        16px
+        16px
+        5px;
+
+    margin-bottom: 18px;
+
+    line-height: 1.6;
+
+    font-size: 16px;
+}
+
+
+/* ==========================================
+   USER MESSAGE
+   ========================================== */
+
+.user-message {
+    width: fit-content;
+
+    max-width: 85%;
+
+    margin-left: auto;
+
+    background: #16858a;
+
+    color: white;
+
+    padding: 15px 18px;
+
+    border-radius:
+        16px
+        16px
+        5px
+        16px;
+
+    margin-bottom: 18px;
+
+    line-height: 1.6;
+
+    font-size: 16px;
+}
+
+
+/* ==========================================
+   AI ANSWER FORMATTING
+   ========================================== */
+
+.bot-message strong {
+    display: inline-block;
+
+    color: #123f45;
+
+    font-size: 17px;
+
+    margin-top: 5px;
+
+    margin-bottom: 5px;
+}
+
+
+.answer-point {
+    margin: 4px 0;
+
+    line-height: 1.55;
+}
+
+
+/* ==========================================
+   HEALTH TOPICS
+   ========================================== */
+
+.health-topics {
+    margin-bottom: 20px;
+}
+
+
+.health-topics h3 {
+    color: #183f45;
+
+    font-size: 18px;
+
+    margin-bottom: 12px;
+}
+
+
+.topic-categories {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+}
+
+
+.topic-categories button {
+    border: 1px solid #cfe3e4;
+
+    background: white;
+
+    color: #24555b;
+
+    padding: 11px 16px;
+
+    border-radius: 12px;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.topic-categories button:hover {
+    background: #e8f5f5;
+
+    border-color: #16858a;
+
+    transform: translateY(-2px);
+}
+
+
+/* ==========================================
+   CHAT INPUT
+   ========================================== */
+
+.chat-input {
+    display: flex;
+
+    gap: 12px;
+
+    padding: 20px;
+
+    background: white;
+
+    border-top: 1px solid #e5eeee;
+}
+
+
+.chat-input input {
+    flex: 1;
+
+    border: 1px solid #cbdcde;
+
+    border-radius: 12px;
+
+    padding: 15px;
+
+    font-size: 16px;
+
+    outline: none;
+}
+
+
+.chat-input input:focus {
+    border-color: #16858a;
+
+    box-shadow:
+        0 0 0 3px rgba(22, 133, 138, 0.1);
+}
+
+
+.chat-input button {
+    border: none;
+
+    background: #16858a;
+
+    color: white;
+
+    padding: 0 25px;
+
+    border-radius: 12px;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.chat-input button:hover {
+    background: #116e73;
+
+    transform: translateY(-1px);
+}
+
+
+/* ==========================================
+   THINKING MESSAGE
+   ========================================== */
+
+.thinking {
+    opacity: 0.7;
+
+    font-style: italic;
+}
+
+
+/* ==========================================
+   ERROR MESSAGE
+   ========================================== */
+
+.error-message {
+    background: #fff1f1;
+
+    color: #8a3333;
+}
+
+
+/* ==========================================
+   HISTORY PAGE
+   ========================================== */
+
+.history-box {
+    width: 100%;
+
+    max-width: 850px;
+
+    background: white;
+
+    border-radius: 22px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 12px 35px rgba(30, 90, 95, 0.12);
+}
+
+
+/* ==========================================
+   HISTORY HEADER
+   ========================================== */
+
+.history-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 30px 25px;
+
+    border-bottom: 1px solid #e5eeee;
+}
+
+
+.history-header h2 {
+    font-size: 27px;
+
+    color: #163940;
+
+    margin-bottom: 8px;
+}
+
+
+.history-header p {
+    color: #71868b;
+
+    font-size: 16px;
+}
+
+
+/* ==========================================
+   BACK BUTTON
+   ========================================== */
+
+.back-button {
+    display: inline-block;
+
+    text-decoration: none;
+
+    background: #16858a;
+
+    color: white;
+
+    padding: 11px 16px;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+
+    transition: 0.2s ease;
+}
+
+
+.back-button:hover {
+    background: #116e73;
+
+    transform: translateY(-1px);
+}
+
+
+/* ==========================================
+   HISTORY CONTAINER
+   ========================================== */
+
+#historyContainer {
+    padding: 25px;
+
+    background: #fbfdfd;
+}
+
+
+/* ==========================================
+   INDIVIDUAL HISTORY ITEM
+   ========================================== */
+
+.history-item {
+    background: white;
+
+    border: 1px solid #dceaea;
+
+    border-radius: 15px;
+
+    padding: 20px;
+
+    margin-bottom: 16px;
+
+    box-shadow:
+        0 4px 12px rgba(30, 90, 95, 0.05);
+}
+
+
+/* ==========================================
+   HISTORY QUESTION
+   ========================================== */
+
+.history-question,
+.history-answer {
+    display: flex;
+
+    gap: 12px;
+
+    align-items: flex-start;
+}
+
+
+.history-question {
+    padding-bottom: 15px;
+
+    border-bottom: 1px solid #edf2f2;
+}
+
+
+.history-answer {
+    padding-top: 15px;
+}
+
+
+.history-question > span,
+.history-answer > span {
+    font-size: 20px;
+
+    flex-shrink: 0;
+}
+
+
+.history-question strong,
+.history-answer strong {
+    display: block;
+
+    color: #16858a;
+
+    font-size: 14px;
+
+    margin-bottom: 5px;
+}
+
+
+.history-question p,
+.history-answer p {
+    color: #344f54;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+
+    margin: 0;
+}
+
+
+/* ==========================================
+   HISTORY DATE
+   ========================================== */
+
+.history-date {
+    color: #8a9a9d;
+
+    font-size: 12px;
+
+    margin-top: 12px;
+}
+
+
+/* ==========================================
+   LOADING
+   ========================================== */
+
+.loading {
+    text-align: center;
+
+    padding: 45px 20px;
+
+    color: #71868b;
+
+    font-size: 15px;
+}
+
+
+/* ==========================================
+   EMPTY HISTORY
+   ========================================== */
+
+.empty-history {
+    text-align: center;
+
+    padding: 55px 20px;
+
+    color: #71868b;
+}
+
+
+.empty-history:first-line {
+    font-size: 35px;
+}
+
+
+.empty-history h3 {
+    color: #23464c;
+
+    font-size: 20px;
+
+    margin: 12px 0 7px;
+}
+
+
+.empty-history p {
+    font-size: 14px;
+}
+
+
+/* ==========================================
+   HISTORY ERROR
+   ========================================== */
+
+.history-error {
+    text-align: center;
+
+    padding: 50px 20px;
+
+    color: #8a3333;
+}
+
+
+.history-error h3 {
+    margin: 12px 0 7px;
+
+    font-size: 19px;
+}
+
+
+.history-error p {
+    font-size: 14px;
+
+    color: #8a6666;
+}
+
+
+/* ==========================================
+   FOOTER
+   ========================================== */
+
+footer {
+    text-align: center;
+
+    padding: 20px;
+
+    color: #71868b;
+
+    font-size: 14px;
+}
+
+
+/* ==========================================
+   MOBILE
+   ========================================== */
+
+@media (max-width: 600px) {
+
+    header {
+        padding: 30px 15px;
+    }
+
+
+    header h1 {
+        font-size: 32px;
+    }
+
+
+    header p {
+        font-size: 15px;
+    }
+
+
+    main {
+        padding: 20px 10px;
+    }
+
+
+    .chat-box,
+    .history-box {
+        border-radius: 16px;
+    }
+
+
+    .chat-header,
+    .history-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+
+    .clear-button,
+    .back-button {
+        width: 100%;
+
+        text-align: center;
+    }
+
+
+    .chat-messages {
+        padding: 20px 15px;
+
+        min-height: 350px;
+    }
+
+
+    .bot-message,
+    .user-message {
+        max-width: 92%;
+
+        font-size: 15px;
+    }
+
+
+    .topic-categories {
+        gap: 8px;
+    }
+
+
+    .topic-categories button {
+        padding: 10px 14px;
+
+        font-size: 14px;
+    }
+
+
+    .chat-input {
+        padding: 12px;
+    }
+
+
+    .chat-input input {
+        min-width: 0;
+    }
+
+
+    .chat-input button {
+        padding: 0 17px;
+    }
+
+
+    .history-header h2 {
+        font-size: 23px;
+    }
+
+
+    #historyContainer {
+        padding: 15px;
+    }
+
+
+    .history-item {
+        padding: 15px;
+    }
+
+}

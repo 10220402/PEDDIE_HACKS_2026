@@ -2,14 +2,8 @@ from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from dotenv import load_dotenv
 from google import genai
+from testing_database import create_database, save_chat
 import os
-
-# Database functions
-from testing_database import (
-    create_database,
-    save_chat,
-    get_chat_history
-)
 
 
 # ==========================================
@@ -22,7 +16,7 @@ api_key = os.getenv("GEMINI_API_KEY")
 
 if not api_key:
     raise ValueError(
-        "GEMINI_API_KEY was not found in the environment variables."
+        "GEMINI_API_KEY was not found in the .env file."
     )
 
 
@@ -38,7 +32,6 @@ client = genai.Client(api_key=api_key)
 # ==========================================
 
 app = Flask(__name__)
-
 CORS(app)
 
 
@@ -50,37 +43,29 @@ create_database()
 
 
 # ==========================================
-# HEALTHLENS WEBSITE
+# HOME - SERVE HEALTHLENS WEBSITE
 # ==========================================
 
 @app.route("/")
 def home():
-    return send_from_directory(".", "index.html")
+
+    return send_from_directory(
+        os.path.dirname(os.path.abspath(__file__)),
+        "index.html"
+    )
 
 
-@app.route("/style.css")
-def style():
-    return send_from_directory(".", "style.css")
+# ==========================================
+# STATIC FILES
+# ==========================================
 
+@app.route("/<path:filename>")
+def static_files(filename):
 
-@app.route("/script.js")
-def script():
-    return send_from_directory(".", "script.js")
-
-
-@app.route("/history.html")
-def history_page():
-    return send_from_directory(".", "history.html")
-
-
-@app.route("/history.js")
-def history_script():
-    return send_from_directory(".", "history.js")
-
-
-@app.route("/assets/<path:filename>")
-def assets(filename):
-    return send_from_directory("assets", filename)
+    return send_from_directory(
+        os.path.dirname(os.path.abspath(__file__)),
+        filename
+    )
 
 
 # ==========================================
@@ -117,16 +102,13 @@ def chat():
     for item in history:
 
         role = item.get("role", "")
-
         text = item.get("message", "")
-
 
         if role == "user":
 
             conversation_context += (
                 f"User: {text}\n"
             )
-
 
         elif role == "assistant":
 
@@ -146,63 +128,161 @@ def chat():
             model="gemini-3.5-flash",
 
             contents=f"""
-You are HealthLens AI, a simple and friendly
-health-information assistant.
+You are HealthLens, a health-information chatbot.
 
-Your goal is to explain health topics in EASY
-ENGLISH so ordinary people can understand the
-information quickly.
+Your ONLY purpose is to answer health-related
+questions.
 
-CONVERSATION RULE:
-- Use the conversation history to understand
-  words such as "it", "its", "they", "them",
-  "this", and "that".
-- If the user asks a follow-up question,
-  understand what health topic they mean from
-  the previous conversation.
-- Do not ask the user to repeat information
-  that is already clear from the conversation.
+==================================================
+HEALTH-ONLY RULE
+==================================================
 
-ANSWER STYLE:
-- Keep every answer short and to the point.
-- Preferably stay under 120 words.
-- Do not write long paragraphs.
-- Do not unnecessarily repeat the question.
-- Give useful information directly.
+You may answer questions about:
 
-FORMATTING:
-- Use clear bold headings with Markdown.
-- Example:
-  **What is Asthma?**
-  **Common Symptoms**
-  **Important**
-- Put every important point on a new line.
-- Use "-" for bullet points.
-- Put a blank line between sections.
-- Keep the answer clean and easy to read.
+• Health
+• Diseases
+• Medical conditions
+• Symptoms
+• The human body
+• Nutrition
+• Sleep
+• Exercise
+• Hygiene
+• Mental wellbeing
+• First aid
+• Prevention
+• Medical tests
+• Healthcare
+• General medicine information
+• Health-related lifestyle questions
 
-HEALTH SAFETY:
-- Provide educational information only.
-- Do not diagnose the user.
-- Do not say the user definitely has a disease.
-- Do not replace a doctor or healthcare professional.
-- Do not provide personalized medication doses.
-- Do not tell users to start, stop, or change
+If the question is genuinely health-related,
+answer it.
+
+If the question is NOT health-related,
+DO NOT answer it.
+
+Do NOT try to connect unrelated questions to
+health.
+
+For ANY unrelated question, reply ONLY:
+
+**I'm HealthLens, a health-information chatbot. 🩺**
+
+• I'm only available to answer health-related
+  questions.
+• Please ask me something about health!
+
+Do not answer or discuss the unrelated question.
+
+==================================================
+FOLLOW-UP QUESTIONS
+==================================================
+
+Use the conversation history to understand
+follow-up questions.
+
+For example:
+
+User: What is asthma?
+
+HealthLens: [answer]
+
+User: What are its symptoms?
+
+Understand that "its" refers to asthma.
+
+Do not ask the user to repeat information that
+is already clear from the conversation.
+
+==================================================
+ANSWER STYLE
+==================================================
+
+For health-related questions:
+
+• Use easy English.
+• Keep answers short and useful.
+• Preferably stay under 120 words.
+• Do not write unnecessarily long paragraphs.
+• Be clear, respectful, and calm.
+
+==================================================
+FORMATTING
+==================================================
+
+Use clean formatting.
+
+Use bold headings when appropriate.
+
+Example:
+
+**What is Asthma?**
+
+• Asthma is a common lung condition that can make
+  breathing difficult.
+
+**Common Symptoms**
+
+• Coughing
+• Wheezing
+• Shortness of breath
+• Chest tightness
+
+**Important**
+
+• This information is for educational purposes.
+
+Formatting rules:
+
+• Put each important point on a new line.
+• Use the bullet character "•".
+• Leave a blank line between sections.
+• Keep the answer visually clean.
+
+==================================================
+HEALTH SAFETY
+==================================================
+
+• Provide educational information only.
+• Do NOT diagnose the user.
+• Do NOT say the user definitely has a disease.
+• Do NOT replace a doctor or healthcare professional.
+• Do NOT provide personalized medication doses.
+• Do NOT tell users to start, stop, or change
   prescription medicine.
-- If serious or emergency symptoms are described,
+• If serious or emergency symptoms are described,
   recommend professional medical help.
 
-LANGUAGE:
-- Use simple everyday English.
-- Be respectful and calm.
-- Avoid unnecessary medical terminology.
-- Explain difficult medical terms simply.
+==================================================
+CONVERSATION HISTORY
+==================================================
 
-CONVERSATION HISTORY:
 {conversation_context}
 
-CURRENT USER QUESTION:
+==================================================
+CURRENT USER QUESTION
+==================================================
+
 {message}
+
+==================================================
+FINAL DECISION
+==================================================
+
+If the question is health-related:
+Answer it.
+
+If the question is NOT health-related:
+Reply ONLY with:
+
+**I'm HealthLens, a health-information chatbot. 🩺**
+
+• I'm only available to answer health-related
+  questions.
+• Please ask me something about health!
+
+Do not add anything else.
 """
         )
 
@@ -215,7 +295,7 @@ CURRENT USER QUESTION:
 
 
         # ==================================
-        # SAVE CHAT TO DATABASE
+        # SAVE CHAT
         # ==================================
 
         save_chat(
@@ -225,7 +305,7 @@ CURRENT USER QUESTION:
 
 
         # ==================================
-        # SEND RESPONSE TO WEBSITE
+        # SEND RESPONSE
         # ==================================
 
         return jsonify({
@@ -245,65 +325,6 @@ CURRENT USER QUESTION:
 
 
 # ==========================================
-# HISTORY
-# ==========================================
-
-@app.route("/history", methods=["GET"])
-def history():
-
-    try:
-
-        rows = get_chat_history()
-
-        history = []
-
-
-        for row in rows:
-
-            chat_id = row[0]
-
-            user_message = row[1]
-
-            ai_response = row[2]
-
-            created_at = row[3]
-
-
-            history.append({
-
-                "id": chat_id,
-
-                "message": user_message,
-
-                "reply": ai_response,
-
-                "created_at": created_at
-
-            })
-
-
-        return jsonify({
-
-            "history": history
-
-        })
-
-
-    except Exception as e:
-
-        print("HISTORY ERROR:", e)
-
-        return jsonify({
-
-            "history": [],
-
-            "error":
-                "Could not load conversation history."
-
-        }), 500
-
-
-# ==========================================
 # START SERVER
 # ==========================================
 
@@ -312,5 +333,5 @@ if __name__ == "__main__":
     app.run(
         host="0.0.0.0",
         port=int(os.environ.get("PORT", 5000)),
-        debug=False
+        debug=True
     )

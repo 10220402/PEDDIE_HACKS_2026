@@ -2,7 +2,11 @@ from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from dotenv import load_dotenv
 from google import genai
-from testing_database import create_database, save_chat
+from testing_database import (
+    create_database,
+    save_chat,
+    get_chat_history
+)
 import os
 
 
@@ -43,7 +47,7 @@ create_database()
 
 
 # ==========================================
-# HOME - SERVE HEALTHLENS WEBSITE
+# WEBSITE HOME
 # ==========================================
 
 @app.route("/")
@@ -56,7 +60,7 @@ def home():
 
 
 # ==========================================
-# STATIC FILES
+# SERVE WEBSITE FILES
 # ==========================================
 
 @app.route("/<path:filename>")
@@ -322,6 +326,43 @@ Do not add anything else.
             "⚠️ HealthLens AI is temporarily unavailable. "
             "Please try again shortly."
         })
+
+
+# ==========================================
+# HISTORY API
+# ==========================================
+
+@app.route("/history", methods=["GET"])
+def history():
+
+    try:
+
+        history_data = get_chat_history()
+
+        history_list = []
+
+        for item in history_data:
+
+            history_list.append({
+                "id": item[0],
+                "user_message": item[1],
+                "ai_response": item[2],
+                "created_at": item[3]
+            })
+
+        return jsonify({
+            "history": history_list
+        })
+
+
+    except Exception as e:
+
+        print("HISTORY ERROR:", e)
+
+        return jsonify({
+            "history": [],
+            "error": "History could not be loaded."
+        }), 500
 
 
 # ==========================================

@@ -1,5 +1,5 @@
 /* ==========================================
-   HEALTHLENS - CLEAN DESIGN
+   HEALTHLENS - LAVENDER MEDICAL AI DESIGN
    ========================================== */
 
 * {
@@ -9,12 +9,39 @@
 }
 
 
+/* ==========================================
+   COLOR PALETTE
+   ========================================== */
+
+:root {
+    --soft-lavender: #F3EEFF;
+    --light-lavender: #E5D8FF;
+    --medium-lavender: #CDB7F6;
+    --dark-purple: #5B2C83;
+    --deep-purple: #45206B;
+    --purple-border: #B99ADD;
+    --purple-shadow: rgba(91, 44, 131, 0.14);
+
+    --white: #FFFFFF;
+
+    --chocolate: #5A3825;
+    --light-chocolate: #76543D;
+
+    --error-bg: #FFF1F1;
+    --error-text: #8A3333;
+}
+
+
+/* ==========================================
+   BODY
+   ========================================== */
+
 body {
     font-family: Arial, Helvetica, sans-serif;
 
-    background: #f2f8f8;
+    background: var(--soft-lavender);
 
-    color: #18323a;
+    color: var(--chocolate);
 
     min-height: 100vh;
 }
@@ -25,13 +52,13 @@ body {
    ========================================== */
 
 header {
-    background: white;
+    background: var(--white);
 
     text-align: center;
 
     padding: 45px 20px 35px;
 
-    border-bottom: 1px solid #e1eeee;
+    border-bottom: 1px solid var(--light-lavender);
 }
 
 
@@ -40,14 +67,14 @@ header h1 {
 
     margin-bottom: 10px;
 
-    color: #12343b;
+    color: var(--dark-purple);
 }
 
 
 header p {
     font-size: 18px;
 
-    color: #60777d;
+    color: var(--light-chocolate);
 }
 
 
@@ -75,14 +102,14 @@ main {
 
     max-width: 850px;
 
-    background: white;
+    background: var(--white);
 
     border-radius: 22px;
 
     overflow: hidden;
 
     box-shadow:
-        0 12px 35px rgba(30, 90, 95, 0.12);
+        0 12px 35px var(--purple-shadow);
 }
 
 
@@ -101,21 +128,21 @@ main {
 
     padding: 30px 25px 25px;
 
-    border-bottom: 1px solid #e5eeee;
+    border-bottom: 1px solid var(--light-lavender);
 }
 
 
 .chat-header h2 {
     font-size: 27px;
 
-    color: #163940;
+    color: var(--dark-purple);
 
     margin-bottom: 8px;
 }
 
 
 .chat-header p {
-    color: #71868b;
+    color: var(--light-chocolate);
 
     font-size: 16px;
 }
@@ -126,11 +153,11 @@ main {
    ========================================== */
 
 .clear-button {
-    border: 1px solid #d7e5e6;
+    border: 1px solid var(--purple-border);
 
-    background: white;
+    background: var(--white);
 
-    color: #60777d;
+    color: var(--dark-purple);
 
     padding: 10px 14px;
 
@@ -147,11 +174,11 @@ main {
 
 
 .clear-button:hover {
-    background: #fff3f3;
+    background: var(--soft-lavender);
 
-    border-color: #e5bcbc;
+    border-color: var(--dark-purple);
 
-    color: #9a4141;
+    color: var(--deep-purple);
 }
 
 
@@ -168,12 +195,12 @@ main {
 
     padding: 30px;
 
-    background: #fbfdfd;
+    background: #FBF9FF;
 }
 
 
 /* ==========================================
-   BOT MESSAGE
+   BOT / AI MESSAGE
    ========================================== */
 
 .bot-message {
@@ -181,9 +208,11 @@ main {
 
     max-width: 85%;
 
-    background: #e8f5f5;
+    background: var(--white);
 
-    color: #243f45;
+    color: var(--chocolate);
+
+    border: 1px solid var(--purple-border);
 
     padding: 15px 18px;
 
@@ -198,6 +227,9 @@ main {
     line-height: 1.6;
 
     font-size: 16px;
+
+    box-shadow:
+        0 3px 10px rgba(91, 44, 131, 0.06);
 }
 
 
@@ -212,9 +244,11 @@ main {
 
     margin-left: auto;
 
-    background: #16858a;
+    background: var(--medium-lavender);
 
-    color: white;
+    color: var(--chocolate);
+
+    border: 1px solid var(--purple-border);
 
     padding: 15px 18px;
 
@@ -229,6 +263,9 @@ main {
     line-height: 1.6;
 
     font-size: 16px;
+
+    box-shadow:
+        0 3px 10px rgba(91, 44, 131, 0.07);
 }
 
 
@@ -239,7 +276,7 @@ main {
 .bot-message strong {
     display: inline-block;
 
-    color: #123f45;
+    color: var(--dark-purple);
 
     font-size: 17px;
 
@@ -266,7 +303,7 @@ main {
 
 
 .health-topics h3 {
-    color: #183f45;
+    color: var(--dark-purple);
 
     font-size: 18px;
 
@@ -284,11 +321,11 @@ main {
 
 
 .topic-categories button {
-    border: 1px solid #cfe3e4;
+    border: 1px solid var(--purple-border);
 
-    background: white;
+    background: var(--white);
 
-    color: #24555b;
+    color: var(--dark-purple);
 
     padding: 11px 16px;
 
@@ -303,11 +340,16 @@ main {
 
 
 .topic-categories button:hover {
-    background: #e8f5f5;
+    background: var(--soft-lavender);
 
-    border-color: #16858a;
+    border-color: var(--dark-purple);
+
+    color: var(--deep-purple);
 
     transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 12px rgba(91, 44, 131, 0.10);
 }
 
 
@@ -322,16 +364,20 @@ main {
 
     padding: 20px;
 
-    background: white;
+    background: var(--white);
 
-    border-top: 1px solid #e5eeee;
+    border-top: 1px solid var(--light-lavender);
 }
 
 
 .chat-input input {
     flex: 1;
 
-    border: 1px solid #cbdcde;
+    border: 1px solid var(--purple-border);
+
+    background: var(--white);
+
+    color: var(--chocolate);
 
     border-radius: 12px;
 
@@ -343,20 +389,25 @@ main {
 }
 
 
+.chat-input input::placeholder {
+    color: #9A806D;
+}
+
+
 .chat-input input:focus {
-    border-color: #16858a;
+    border-color: var(--dark-purple);
 
     box-shadow:
-        0 0 0 3px rgba(22, 133, 138, 0.1);
+        0 0 0 3px rgba(91, 44, 131, 0.10);
 }
 
 
 .chat-input button {
     border: none;
 
-    background: #16858a;
+    background: var(--dark-purple);
 
-    color: white;
+    color: var(--white);
 
     padding: 0 25px;
 
@@ -371,9 +422,12 @@ main {
 
 
 .chat-input button:hover {
-    background: #116e73;
+    background: var(--deep-purple);
 
     transform: translateY(-1px);
+
+    box-shadow:
+        0 5px 12px rgba(91, 44, 131, 0.20);
 }
 
 
@@ -385,6 +439,8 @@ main {
     opacity: 0.7;
 
     font-style: italic;
+
+    color: var(--light-chocolate);
 }
 
 
@@ -393,9 +449,11 @@ main {
    ========================================== */
 
 .error-message {
-    background: #fff1f1;
+    background: var(--error-bg);
 
-    color: #8a3333;
+    color: var(--error-text);
+
+    border-color: #E5BCBC;
 }
 
 
@@ -408,14 +466,14 @@ main {
 
     max-width: 850px;
 
-    background: white;
+    background: var(--white);
 
     border-radius: 22px;
 
     overflow: hidden;
 
     box-shadow:
-        0 12px 35px rgba(30, 90, 95, 0.12);
+        0 12px 35px var(--purple-shadow);
 }
 
 
@@ -434,21 +492,21 @@ main {
 
     padding: 30px 25px;
 
-    border-bottom: 1px solid #e5eeee;
+    border-bottom: 1px solid var(--light-lavender);
 }
 
 
 .history-header h2 {
     font-size: 27px;
 
-    color: #163940;
+    color: var(--dark-purple);
 
     margin-bottom: 8px;
 }
 
 
 .history-header p {
-    color: #71868b;
+    color: var(--light-chocolate);
 
     font-size: 16px;
 }
@@ -463,9 +521,9 @@ main {
 
     text-decoration: none;
 
-    background: #16858a;
+    background: var(--dark-purple);
 
-    color: white;
+    color: var(--white);
 
     padding: 11px 16px;
 
@@ -478,9 +536,12 @@ main {
 
 
 .back-button:hover {
-    background: #116e73;
+    background: var(--deep-purple);
 
     transform: translateY(-1px);
+
+    box-shadow:
+        0 5px 12px rgba(91, 44, 131, 0.20);
 }
 
 
@@ -491,7 +552,7 @@ main {
 #historyContainer {
     padding: 25px;
 
-    background: #fbfdfd;
+    background: #FBF9FF;
 }
 
 
@@ -500,9 +561,9 @@ main {
    ========================================== */
 
 .history-item {
-    background: white;
+    background: var(--white);
 
-    border: 1px solid #dceaea;
+    border: 1px solid var(--purple-border);
 
     border-radius: 15px;
 
@@ -511,12 +572,12 @@ main {
     margin-bottom: 16px;
 
     box-shadow:
-        0 4px 12px rgba(30, 90, 95, 0.05);
+        0 4px 12px rgba(91, 44, 131, 0.06);
 }
 
 
 /* ==========================================
-   HISTORY QUESTION
+   HISTORY QUESTION & ANSWER
    ========================================== */
 
 .history-question,
@@ -532,7 +593,7 @@ main {
 .history-question {
     padding-bottom: 15px;
 
-    border-bottom: 1px solid #edf2f2;
+    border-bottom: 1px solid var(--light-lavender);
 }
 
 
@@ -553,7 +614,7 @@ main {
 .history-answer strong {
     display: block;
 
-    color: #16858a;
+    color: var(--dark-purple);
 
     font-size: 14px;
 
@@ -563,7 +624,7 @@ main {
 
 .history-question p,
 .history-answer p {
-    color: #344f54;
+    color: var(--chocolate);
 
     font-size: 15px;
 
@@ -578,7 +639,7 @@ main {
    ========================================== */
 
 .history-date {
-    color: #8a9a9d;
+    color: #967E6C;
 
     font-size: 12px;
 
@@ -595,7 +656,7 @@ main {
 
     padding: 45px 20px;
 
-    color: #71868b;
+    color: var(--light-chocolate);
 
     font-size: 15px;
 }
@@ -610,7 +671,7 @@ main {
 
     padding: 55px 20px;
 
-    color: #71868b;
+    color: var(--light-chocolate);
 }
 
 
@@ -620,7 +681,7 @@ main {
 
 
 .empty-history h3 {
-    color: #23464c;
+    color: var(--dark-purple);
 
     font-size: 20px;
 
@@ -642,7 +703,7 @@ main {
 
     padding: 50px 20px;
 
-    color: #8a3333;
+    color: var(--error-text);
 }
 
 
@@ -656,7 +717,7 @@ main {
 .history-error p {
     font-size: 14px;
 
-    color: #8a6666;
+    color: #8A6666;
 }
 
 
@@ -669,7 +730,7 @@ footer {
 
     padding: 20px;
 
-    color: #71868b;
+    color: var(--light-chocolate);
 
     font-size: 14px;
 }

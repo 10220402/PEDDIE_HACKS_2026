@@ -345,8 +345,15 @@ def history():
 
             history_list.append({
                 "id": item[0],
-                "user_message": item[1],
-                "ai_response": item[2],
+
+                # IMPORTANT:
+                # history.js expects "message"
+                "message": item[1],
+
+                # IMPORTANT:
+                # history.js expects "reply"
+                "reply": item[2],
+
                 "created_at": item[3]
             })
 
